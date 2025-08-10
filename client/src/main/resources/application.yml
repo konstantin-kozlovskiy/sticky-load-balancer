@@ -1,0 +1,37 @@
+server:
+  port: 9080
+
+spring:
+  application:
+    name: sticky-balancer-client
+  codec:
+    max-in-memory-size: 10MB
+    
+client:
+  server-url: http://localhost:9091
+  request-interval: 1000
+  max-concurrent-requests: 10
+  thread-count: 5
+  startup-delay-seconds: 5
+  min-delay-between-check-and-pay-seconds: 5
+  max-delay-between-check-and-pay-seconds: 15
+  servers:
+    - health-check-url: http://localhost:9091
+      service-url: http://localhost:9091
+    - health-check-url: http://localhost:9092
+      service-url: http://localhost:9092
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.stickybalancer.client: INFO
+    reactivefeign.client.log.DefaultReactiveLogger: OFF
+    

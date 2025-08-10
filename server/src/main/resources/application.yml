@@ -1,0 +1,20 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: sticky-balancer-server
+
+logging:
+  level:
+    com.stickybalancer.server: INFO
+    reactor.netty: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
