@@ -14,7 +14,7 @@ class PaymentServiceTest {
     private lateinit var paymentService: PaymentService
     
     @Test
-    fun `should check payment successfully`() {
+    fun testShouldCheckPaymentSuccessfully() {
         val request = PaymentRequestDto(
             paymentId = "test-payment-1",
             amount = 100.0,
@@ -31,7 +31,7 @@ class PaymentServiceTest {
     }
     
     @Test
-    fun `should process payment successfully`() {
+    fun testShouldProcessPaymentSuccessfully() {
         // Сначала проверяем платеж
         val checkRequest = PaymentRequestDto(
             paymentId = "test-payment-2",
@@ -51,7 +51,7 @@ class PaymentServiceTest {
     }
     
     @Test
-    fun `should return PAY_ERROR for non-existent payment`() {
+    fun testShouldReturnPayErrorForNonExistentPayment() {
         StepVerifier.create(paymentService.processPayment("non-existent-payment"))
             .expectNextMatches { response ->
                 response.status == "PAY_ERROR"

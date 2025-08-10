@@ -35,6 +35,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    
+    // WireMock для интеграционного тестирования
+    testImplementation("org.wiremock:wiremock-standalone:3.4.2")
 }
 
 // Отключаем bootJar для библиотеки (не создаем исполняемый JAR)

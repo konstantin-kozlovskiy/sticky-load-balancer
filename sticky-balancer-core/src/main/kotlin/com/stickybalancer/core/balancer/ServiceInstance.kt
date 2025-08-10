@@ -54,6 +54,17 @@ class ServiceInstance<T>(
             status = newStatus
             val timestamp = Instant.now()
             statusHistory[timestamp] = newStatus
+
+            // Если записей больше 1000, удаляем самые старые
+            if (statusHistory.size > 1000) {
+                val toRemove = statusHistory.entries
+                    .sortedBy { it.key }
+                    .take(statusHistory.size - 1000)
+                for (entry in toRemove) {
+                    statusHistory.remove(entry.key)
+                }
+            }
+
             logger.info("[$name: $url] Health status changed from $oldStatus to $newStatus")
         }
     }
@@ -75,6 +86,10 @@ class ServiceInstance<T>(
             .filter { it.key <= timestamp }
             .maxByOrNull { it.key }
             ?.value ?: "UP" // По умолчанию UP если нет истории
+    }
+
+    fun getStatuses(): List<String> {
+        return statusHistory.values.toList()
     }
 
     override fun toString(): String {
