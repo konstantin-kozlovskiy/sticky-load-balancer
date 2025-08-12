@@ -30,7 +30,7 @@ data class ServiceInstanceConfiguration(
      * - "https://api.example.com"
      * - "http://localhost:8080"
      */
-    val serviceUrl: String,
+    var serviceUrl: String = "",
 
     /**
      * URL для проверки здоровья сервера.
@@ -44,5 +44,5 @@ data class ServiceInstanceConfiguration(
      * - "https://api.example.com"
      * - "http://localhost:8080"
      */
-    val healthCheckUrl: String
+    var healthCheckUrl: String = "",
 )
